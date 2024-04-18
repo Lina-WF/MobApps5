@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (cameraPermissionStatus == PackageManager.PERMISSION_GRANTED && storagePermissionStatus == PackageManager.PERMISSION_GRANTED) {
             isWork = true;
+            Log.d("a", "isWork true");
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA,
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSION);
@@ -65,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
         binding.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("a", "click");
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (isWork) {
+                    Log.d("a", "click true");
                     try {
                         File photoFile = createImageFile();
                         String authorities = getApplicationContext().getPackageName() + ".fileprovider";
